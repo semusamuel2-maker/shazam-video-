@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            width: 350px;
+            min-height: 500px;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .container {
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+        }
+        
+        .logo svg {
+            width: 30px;
+            height: 30px;
+            fill: #667eea;
+        }
+        
+        h1 {
+            color: white;
+            font-size: 24px;
+            margin: 0 0 5px 0;
+        }
+        
+        .subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+        }
+        
+        .main-button {
+            width: 100%;
+            height: 120px;
+            background: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #667eea;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: transform 0.2s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .main-button:hover {
+            transform: scale(1.05);
+        }
+        
+        .main-button:active {
+            transform: scale(0.95);
+        }
+        
+        .main-button svg {
+            width: 40px;
+            height: 40px;
+        }
+        
+        .main-button.analyzing {
+            background: #ef4444;
+            color: white;
+        }
+        
+        .status {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            color: white;
+            text-align: center;
+            margin-top: 15px;
+            display: none;
+        }
+        
+        .status.show {
+            display: block;
+        }
+        
+        .status-text {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .debug-text {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+        
+        .error {
+            background: #fecaca;
+            padding: 15px;
+            border-radius: 10px;
+            color: #991b1b;
+            margin-top: 15px;
+            display: none;
+            font-size: 14px;
+        }
+        
+        .error.show {
+            display: block;
+        }
+        
+        .result {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 15px;
+            display: none;
+        }
+        
+        .result.show {
+            display: block;
+        }
+        
+        .result-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 15px;
+            color: #059669;
+            font-weight: bold;
+        }
+        
+        .result-item {
+            margin-bottom: 12px;
+        }
+        
+        .result-label {
+            font-size: 12px;
+            color: #6b7280;
+            margin-bottom: 4px;
+        }
+        
+        .result-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1f2937;
+        }
+        
+        .result-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #111827;
+        }
+        
+        .confidence-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        
+        .confidence-high {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        
+        .confidence-medium {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        .confidence-low {
+            background: #e5e7eb;
+            color: #374151;
+        }
+        
+        .instructions {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            color: white;
+            font-size: 12px;
+        }
+        
+        .instructions h4 {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+        }
+        
+        .instructions ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 5px;
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .spin {
+            animation: spin 1s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                </svg>
+            </div>
+            <h1>Video Shazam</h1>
+            <div class="subtitle">Identify what you're watching</div>
+        </div>
+
+        <button id="mainButton" class="main-button">
+            <svg id="buttonIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+            </svg>
+            <span id="buttonText">Tap to Identify</span>
+        </button>
+
+        <div id="status" class="status">
+            <div class="status-text" id="statusText"></div>
+            <div class="debug-text" id="debugText"></div>
+        </div>
+
+        <div id="error" class="error"></div>
+
+        <div id="result" class="result">
+            <div class="result-header">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <span>Identified!</span>
+            </div>
+            <div class="result-item">
+                <div class="result-label">Type</div>
+                <div class="result-value" id="resultType"></div>
+            </div>
+            <div class="result-item">
+                <div class="result-label">Title</div>
+                <div class="result-title" id="resultTitle"></div>
+            </div>
+            <div class="result-item" id="detailsContainer">
+                <div class="result-label">Details</div>
+                <div class="result-value" id="resultDetails"></div>
+            </div>
+            <span id="confidenceBadge" class="confidence-badge"></span>
+        </div>
+
+        <div class="instructions">
+            <h4>How to use:</h4>
+            <ol>
+                <li>Open a video in any tab</li>
+                <li>Click this extension icon</li>
+                <li>Click "Tap to Identify"</li>
+                <li>Wait 7-10 seconds</li>
+                <li>Get your result!</li>
+            </ol>
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>
