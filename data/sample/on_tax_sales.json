@@ -1,0 +1,42 @@
+[
+  {
+    "municipality": "Peterborough",
+    "pin": "ON-PIN-100001",
+    "roll_or_pin": "ON-PIN-100001",
+    "address": "123 Water St, Peterborough, ON",
+    "advertised_date": "2026-05-01",
+    "minimum_tender": 84210.55,
+    "latitude": 44.3091,
+    "longitude": -78.3197
+  },
+  {
+    "municipality": "Peterborough",
+    "pin": "ON-PIN-100002",
+    "roll_or_pin": "ON-PIN-100002",
+    "address": "45 George St N, Peterborough, ON",
+    "advertised_date": "2026-05-01",
+    "minimum_tender": 122900.00,
+    "latitude": 44.3055,
+    "longitude": -78.3201
+  },
+  {
+    "municipality": "Kawartha Lakes",
+    "pin": "ON-PIN-100003",
+    "roll_or_pin": "ON-PIN-100003",
+    "address": "8 Lindsay St S, Lindsay, ON",
+    "advertised_date": "2026-04-15",
+    "minimum_tender": 67500.00,
+    "latitude": 44.3573,
+    "longitude": -78.7378
+  },
+  {
+    "municipality": "Hamilton",
+    "pin": "ON-PIN-100004",
+    "roll_or_pin": "ON-PIN-100004",
+    "address": "210 King St E, Hamilton, ON",
+    "advertised_date": "2026-06-01",
+    "minimum_tender": 198450.75,
+    "latitude": 43.2557,
+    "longitude": -79.8631
+  }
+]

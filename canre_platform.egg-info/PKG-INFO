@@ -1,0 +1,18 @@
+Metadata-Version: 2.4
+Name: canre-platform
+Version: 0.1.0
+Summary: Canadian Real Estate Investment Data Platform (v1 scaffold)
+Requires-Python: >=3.11
+Requires-Dist: fastapi>=0.110
+Requires-Dist: uvicorn[standard]>=0.27
+Requires-Dist: sqlalchemy>=2.0
+Requires-Dist: pydantic>=2.6
+Requires-Dist: pydantic-settings>=2.2
+Requires-Dist: httpx>=0.27
+Requires-Dist: python-dateutil>=2.9
+Provides-Extra: dev
+Requires-Dist: pytest>=8.0; extra == "dev"
+Requires-Dist: pytest-asyncio>=0.23; extra == "dev"
+Provides-Extra: postgis
+Requires-Dist: psycopg[binary]>=3.1; extra == "postgis"
+Requires-Dist: geoalchemy2>=0.14; extra == "postgis"
